@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
-import smileyImage from "./smiley.png";
+import smileyImage from "./smiley.jpg";
 
 const socket = io("http://localhost:3001", {
   transports: ["websocket", "polling", "flashsocket"],
