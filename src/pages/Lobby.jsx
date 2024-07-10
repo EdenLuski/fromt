@@ -9,7 +9,7 @@ const Lobby = () => {
   useEffect(() => {
   
     axios
-      .get("http://localhost:3001/api/codeblocks")
+      .get("https://back-0klk.onrender.com/api/codeblocks")
       .then((response) => setCodeBlocks(response.data))
       .catch((error) => console.error(error));
   }, []);
@@ -18,7 +18,7 @@ const Lobby = () => {
     <div className="my-style">
       <h1>Welcome to the Lobby!</h1>
       <div>
-        <h1>Choose code block</h1>
+        <h2>Choose code block</h2>
         <ul>
           {codeBlocks.map((block, index) => (
             <li key={index}>

@@ -3,7 +3,7 @@ import Editor from "@monaco-editor/react";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3001", {
+const socket = io("https://back-0klk.onrender.com", {
   transports: ["websocket", "polling", "flashsocket"],
 });
 const CodeBlocks = () => {

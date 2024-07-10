@@ -2,18 +2,24 @@
 
 /* סגנון לאלמנט div עם קלאס "my-style" */
 .my-style {
-  background-color: #891515;
+  background-color: #cce3de;
   padding: 20px;
-  border: 1px solid #cb4141;
+  border: 1px solid #f1f1f1;
   border-radius: 4px;
   font-family: Arial, sans-serif;
   font-size: 16px;
-  color: #982828;
+  color: #4545a1;
 }
 
 /* סגנון לאלמנט h1 */
 .my-style h1 {
-  color: #36a520;
+  color: #6092a8;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.my-style h2 {
+  color: #487e96;
   font-size: 24px;
   margin-bottom: 10px;
 }
