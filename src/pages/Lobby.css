@@ -1,6 +1,4 @@
-/* styles.css */
 
-/* סגנון לאלמנט div עם קלאס "my-style" */
 .my-style {
   background-color: #cce3de;
   padding: 20px;
@@ -11,7 +9,6 @@
   color: #4545a1;
 }
 
-/* סגנון לאלמנט h1 */
 .my-style h1 {
   color: #6092a8;
   font-size: 24px;
