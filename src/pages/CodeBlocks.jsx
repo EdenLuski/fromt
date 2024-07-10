@@ -4,22 +4,24 @@ import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import smileyImage from "./smiley.jpg";
 
+// חיבור לשרת ה-Socket.io
 const socket = io("http://localhost:3001", {
   transports: ["websocket", "polling", "flashsocket"],
 });
 
 const CodeBlocks = () => {
-  const { id } = useParams();
-  const [code, setCode] = useState("// Write your code here");
-  const [role, setRole] = useState("student");
-  const [solution, setSolution] = useState("");
-  const [studentsCount, setStudentsCount] = useState(0);
-  const [isCorrect, setIsCorrect] = useState(false);
+  const { id } = useParams(); // שימוש ב-useParams כדי לקבל את מזהה ה-CodeBlock מה-URL
+  const [code, setCode] = useState("// Write your code here"); // משתנה למעקב אחרי הקוד הנוכחי
+  const [role, setRole] = useState("student"); // משתנה למעקב אחרי תפקיד המשתמש (תלמיד או מנטור)
+  const [solution, setSolution] = useState(""); // משתנה למעקב אחרי הפתרון הנוכחי
+  const [studentsCount, setStudentsCount] = useState(0); // משתנה למעקב אחרי מספר התלמידים בחדר
+  const [isCorrect, setIsCorrect] = useState(false); // משתנה למעקב אחרי תקינות הפתרון
 
   useEffect(() => {
     console.log(`Joining code block with ID: ${id}`);
     socket.emit("join", { codeBlockId: id });
 
+    // מאזין לאירוע init לקבלת נתונים ראשוניים
     socket.on("init", ({ initialCode, solution, role, students }) => {
       console.log("Init data received", {
         initialCode,
@@ -33,6 +35,7 @@ const CodeBlocks = () => {
       setStudentsCount(students);
     });
 
+    // מאזין לאירוע codeUpdate לעדכון הקוד
     socket.on("codeUpdate", (newCode) => {
       console.log("Code update received", newCode);
       setCode(newCode);
@@ -44,6 +47,7 @@ const CodeBlocks = () => {
       }
     });
 
+    // מאזין לאירוע solutionUpdate לעדכון הפתרון
     socket.on("solutionUpdate", (newSolution) => {
       console.log("Solution update received", newSolution);
       setSolution(newSolution);
@@ -55,6 +59,7 @@ const CodeBlocks = () => {
       }
     });
 
+    // מאזין לאירוע studentsCount לעדכון מספר התלמידים
     socket.on("studentsCount", (count) => {
       console.log("Students count update received", count);
       setStudentsCount(count);

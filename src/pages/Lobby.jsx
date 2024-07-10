@@ -7,13 +7,12 @@ const Lobby = () => {
   const [codeBlocks, setCodeBlocks] = useState([]);
 
   useEffect(() => {
-  
     axios
       .get("http://localhost:3001/api/codeblocks")
       .then((response) => setCodeBlocks(response.data))
       .catch((error) => console.error(error));
   }, []);
-  console.log(codeBlocks)
+  console.log(codeBlocks);
   return (
     <div className="my-style">
       <h1>Welcome to the Lobby!</h1>
