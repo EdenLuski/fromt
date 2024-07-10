@@ -2,26 +2,24 @@ import React, { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
-import smileyImage from "./smiley.jpg";
+import smileyImage from "./smiley.jpg"; // Import the image
 
-// חיבור לשרת ה-Socket.io
-const socket = io("http://localhost:3001", {
+const socket = io("https://back-0klk.onrender.com", {
   transports: ["websocket", "polling", "flashsocket"],
 });
 
 const CodeBlocks = () => {
-  const { id } = useParams(); // שימוש ב-useParams כדי לקבל את מזהה ה-CodeBlock מה-URL
-  const [code, setCode] = useState("// Write your code here"); // משתנה למעקב אחרי הקוד הנוכחי
-  const [role, setRole] = useState("student"); // משתנה למעקב אחרי תפקיד המשתמש (תלמיד או מנטור)
-  const [solution, setSolution] = useState(""); // משתנה למעקב אחרי הפתרון הנוכחי
-  const [studentsCount, setStudentsCount] = useState(0); // משתנה למעקב אחרי מספר התלמידים בחדר
-  const [isCorrect, setIsCorrect] = useState(false); // משתנה למעקב אחרי תקינות הפתרון
+  const { id } = useParams();
+  const [code, setCode] = useState("// Write your code here");
+  const [role, setRole] = useState("student");
+  const [solution, setSolution] = useState("");
+  const [studentsCount, setStudentsCount] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   useEffect(() => {
     console.log(`Joining code block with ID: ${id}`);
     socket.emit("join", { codeBlockId: id });
 
-    // מאזין לאירוע init לקבלת נתונים ראשוניים
     socket.on("init", ({ initialCode, solution, role, students }) => {
       console.log("Init data received", {
         initialCode,
@@ -35,34 +33,36 @@ const CodeBlocks = () => {
       setStudentsCount(students);
     });
 
-    // מאזין לאירוע codeUpdate לעדכון הקוד
     socket.on("codeUpdate", (newCode) => {
       console.log("Code update received", newCode);
       setCode(newCode);
       if (role === "student" && newCode === solution) {
         setIsCorrect(true);
-        setTimeout(() => setIsCorrect(false), 3000); // הסתרת הסמיילי אחרי 3 שניות
+        setTimeout(() => setIsCorrect(false), 3000); // Hide the smiley after 3 seconds
       } else {
         setIsCorrect(false);
       }
     });
 
-    // מאזין לאירוע solutionUpdate לעדכון הפתרון
     socket.on("solutionUpdate", (newSolution) => {
       console.log("Solution update received", newSolution);
       setSolution(newSolution);
       if (role === "student" && code === newSolution) {
         setIsCorrect(true);
-        setTimeout(() => setIsCorrect(false), 3000); // הסתרת הסמיילי אחרי 3 שניות
+        setTimeout(() => setIsCorrect(false), 3000); // Hide the smiley after 3 seconds
       } else {
         setIsCorrect(false);
       }
     });
 
-    // מאזין לאירוע studentsCount לעדכון מספר התלמידים
     socket.on("studentsCount", (count) => {
       console.log("Students count update received", count);
       setStudentsCount(count);
+    });
+
+    socket.on("reset", () => {
+      alert("The mentor has left. You will be redirected to the lobby.");
+      window.location.href = "/"; // Redirection to the lobby
     });
 
     return () => {
@@ -79,7 +79,7 @@ const CodeBlocks = () => {
     }
     if (role === "student" && newCode === solution) {
       setIsCorrect(true);
-      setTimeout(() => setIsCorrect(false), 3000); // הסתרת הסמיילי אחרי 3 שניות
+      setTimeout(() => setIsCorrect(false), 3000); // Hide the smiley after 3 seconds
     } else {
       setIsCorrect(false);
     }
@@ -115,7 +115,7 @@ const CodeBlocks = () => {
         height="90vh"
         language="javascript"
         value={code}
-        options={{ readOnly: role === "mentor" }}
+        options={{ readOnly: role === "mentor" }} // Mentor are in read-only mode
         onChange={(value) => handleCodeChange(value)}
       />
       {role === "mentor" && (

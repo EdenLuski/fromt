@@ -8,7 +8,7 @@ const Lobby = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/codeblocks")
+      .get("https://back-0klk.onrender.com/api/codeblocks")
       .then((response) => setCodeBlocks(response.data))
       .catch((error) => console.error(error));
   }, []);
