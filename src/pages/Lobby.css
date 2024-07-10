@@ -1,0 +1,19 @@
+/* styles.css */
+
+/* סגנון לאלמנט div עם קלאס "my-style" */
+.my-style {
+  background-color: #891515;
+  padding: 20px;
+  border: 1px solid #cb4141;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #982828;
+}
+
+/* סגנון לאלמנט h1 */
+.my-style h1 {
+  color: #36a520;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
