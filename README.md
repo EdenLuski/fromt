@@ -1,54 +1,70 @@
-# Online Coding Web Application
+# Getting Started with Create React App
 
-## Overview
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project is an online coding web application designed to help Tom, a professional JS lecturer, follow his students' progress in their journey of becoming JS masters. The application includes the following features:
+## Available Scripts
 
-- _Lobby Page_: A page where users can choose a code block to work on.
-- _Code Block Page_: A page where users can see and edit code blocks. The first user to open a code block is the mentor, and subsequent users are students. The mentor can edit the code, while students can only view it. Changes are displayed in real-time.
+In the project directory, you can run:
 
-## Features
+### `npm start`
 
-- _Real-time Code Editing_: Changes to the code block are displayed to all users in real-time using WebSockets.
-- _Syntax Highlighting_: Code blocks have syntax highlighting.
-- _Student Count_: Each user can see how many students are in the room at any given time.
-- _Solution Check_: When a student changes the code to match the solution, a big smiley face is displayed on the screen for 3 seconds.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## WebSocket Events
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### Client to Server
+### `npm test`
 
-- _join_: Join a code block.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-  - Payload: \{ codeBlockId: <id> }\
+### `npm run build`
 
-- _codeChange_: Send a code change.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-  - Payload: \{ codeBlockId: <id>, newCode: <code> }\
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- _solutionChange_: Send a solution change.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-  - Payload: \{ codeBlockId: <id>, newSolution: <solution> }\
+### `npm run eject`
 
-- _leave_: Leave a code block.
-  - Payload: \{ codeBlockId: <id> }\
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### Server to Client
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-- _init_: Initialize a code block.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-  - Payload: \{ initialCode: <code>, solution: <solution>, role: <role>, students: <count> }\
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-- _codeUpdate_: Update the code block.
+## Learn More
 
-  - Payload: \<newCode>\
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-- _solutionUpdate_: Update the solution.
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-  - Payload: \<newSolution>\
+### Code Splitting
 
-- _studentsCount_: Update the student count.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-  - Payload: \<count>\
+### Analyzing the Bundle Size
 
-- _reset_: Notify clients to leave and reset.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
